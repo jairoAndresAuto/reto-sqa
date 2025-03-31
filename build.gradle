@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.10.0'  // Plugin de Allure para generar los reportes
+}
+
+repositories {
+    mavenCentral()  // Repositorio de Maven para resolver dependencias
+}
+
+dependencies {
+    // No necesitas incluir allure-gradle aquí
+    testImplementation 'io.cucumber:cucumber-java:6.10.4'  // Dependencia de Cucumber
+    testImplementation 'io.cucumber:cucumber-junit:6.10.4'  // Dependencia de Cucumber para JUnit
+    testImplementation 'junit:junit:4.13.1'  // Dependencia de JUnit
+    testImplementation 'com.microsoft.playwright:playwright:1.32.0'  // Dependencia de Playwright
+    testImplementation "com.github.javafaker:javafaker:1.0.2"  // Dependencia de Java Faker
+    testImplementation 'io.qameta.allure:allure-java-commons:2.13.9'  // Librería de Allure para Java
+}
+
+test {
+    useJUnit()  // Usamos JUnit
+    systemProperty "allure.results.directory", "build/allure-results"  // Directorio donde se guardarán los resultados de Allure
+}
+
+allure {
+    version = '2.13.9'  // Versión de Allure
+    autoconfigure = true  // Autoconfiguración de Allure
+}
