@@ -8,21 +8,20 @@ import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Y;
-import org.junit.Assert;
 import task.AgregarProducto;
 import task.EliminarArticulo;
 import task.IngresarCategoria;
+import task.SeguirComprando;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public class ProductoCumpleañosSteps {
+public class ProductoSteps {
 
     private Page page;
     private IngresarCategoria ingresarCategoria=new IngresarCategoria();
     private AgregarProducto agregarProducto=new AgregarProducto();
+    private SeguirComprando seguirComprando=new SeguirComprando();
     private EliminarArticulo eliminarArticulo=new EliminarArticulo();
-
 
     @Dado("que navego a la página {string}")
     public void que_navego_a_la_página(String url) {
@@ -50,7 +49,27 @@ public class ProductoCumpleañosSteps {
 
     @Entonces("debería ver el mensaje {string}")
     public void debería_ver_el_mensaje(String mensaje) {
-        assertEquals(mensaje,page.textContent("div[class='cart-empty woocommerce-info']"));
+        assertEquals(mensaje,
+                page.textContent("div[class='cart-empty woocommerce-info']").trim());
+    }
+
+    //-----------------------------------------
+
+    @Cuando("selecciono la categoria amor")
+    public void seleccionoLaCategoriaAmor() {
+        ingresarCategoria.amor(page);
+    }
+
+    @Cuando("lo agrego los productos")
+    public void lo_agrego_los_productos() throws InterruptedException {
+        agregarProducto.aSeleccionar(page);
+        seguirComprando.productos(page);
+        agregarProducto.aSeleccionar(page);
+    }
+
+    @Entonces("deberia ver los productos en el carrito")
+    public void deberia_ver_los_productos_en_el_carrito() {
+
     }
 
 

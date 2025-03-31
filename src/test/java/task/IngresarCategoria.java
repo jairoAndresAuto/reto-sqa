@@ -10,6 +10,11 @@ public class IngresarCategoria {
 
     public void cumpleanios(Page page) {
         Ingresar ingresar=new Ingresar(page);
-        ingresar.categoria();
+        ingresar.categoriaCumpleaños();
+    }
+
+    public void amor(Page page) {
+        Ingresar ingresar=new Ingresar(page);
+        ingresar.categoriaAmor();
     }
 }
